@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body class="flex flex-col sm:flex-row">
+    <!-- Mobile Nav-bar -->
+    <header class="relative sm:hidden">
+      <nav
+        class="flex justify-between items-center m-4 p-4 bg-[--surface-light] rounded-lg shadow-[0px_4px_58.5px_0px_#0000000F]"
+      >
+        <h1
+          class="whitespace-nowrap text-[var(--text-primary)] text-base font-bold mx-auto"
+        >
+          Todo List
+        </h1>
+        <button id="hamburger-menu" class="p-2 absolute right-7">
+          <img
+            src="./assets/icons/hamburger.svg"
+            alt="menu"
+            class="w-6 h-6 block dark:hidden"
+          />
+          <img
+            src="./assets/icons/darkmode/Hamburger-Menu.svg"
+            alt="menu"
+            class="w-6 h-6 hidden dark:block"
+          />
+        </button>
+      </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileDrawer" class="hidden sm:hidden fixed inset-0 z-40">
+      <!-- Background -->
+      <div
+        id="drawerBackdrop"
+        class="absolute inset-0 bg-black bg-opacity-50"
+      ></div>
+      <!-- Aside -->
+      <aside
+        id="drawerContent"
+        class="absolute left-0 top-0 h-full w-[200px] max-w-xs bg-[--surface-light] p-5 shadow-lg flex flex-col justify-between transform translate-x-full transition-transform duration-300"
+      >
+        <button id="drawerClose" class="absolute top-3 right-3 p-2">
+          <img
+            src="./assets/icons/Close-light.svg"
+            alt="close-light"
+            class="w-7 block dark:hidden"
+          />
+          <img
+            src="./assets/icons/darkmode/Close-dark.svg"
+            alt="close-dark"
+            class="w-7 hidden dark:block"
+          />
+        </button>
+        <h1
+          class="text-[var(--text-primary)] text-base font-bold text-left pl-5 mb-8"
+        >
+          Todo List
+        </h1>
+        <nav class="w-full">
+          <ul class="flex flex-col justify-center items-start w-full gap-6">
+            <li class="flex py-3 pl-5 gap-4">
+              <img
+                src="./assets/icons/menu 1.svg"
+                alt=""
+                class="block dark:hidden"
+              />
+              <img
+                src="./assets/icons/darkmode/Aside-1.svg"
+                alt=""
+                class="hidden dark:block"
+              />
+              <a
+                href="index.html"
+                class="whitespace-nowrap text-base font-bold text-[var(--primary)] dark:text-white"
+                >Home</a
+              >
+            </li>
+            <li class="flex py-3 pl-5 gap-4">
+              <img
+                src="./assets/icons/menu 2.svg"
+                alt=""
+                class="block dark:hidden"
+              />
+              <img
+                src="./assets/icons/darkmode/Aside-2.svg"
+                alt=""
+                class="hidden dark:block"
+              />
+              <a
+                href=""
+                class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+                >Tasks</a
+              >
+            </li>
+            <li class="flex py-3 pl-5 gap-4">
+              <img
+                src="./assets/icons/menu 3.svg"
+                alt=""
+                class="block dark:hidden"
+              />
+              <img
+                src="./assets/icons/darkmode/Aside-3.svg"
+                alt=""
+                class="hidden dark:block"
+              />
+              <a
+                href=""
+                class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+                >Calendar</a
+              >
+            </li>
+            <li class="flex py-3 pl-5 gap-4">
+              <img
+                src="./assets/icons/menu 4.svg"
+                alt=""
+                class="block dark:hidden"
+              />
+              <img
+                src="./assets/icons/darkmode/Aside-4.svg"
+                alt=""
+                class="hidden dark:block"
+              />
+              <a
+                href=""
+                class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+                >Reports</a
+              >
+            </li>
+            <li class="flex py-3 pl-5 gap-4">
+              <img
+                src="./assets/icons/menu 5.svg"
+                alt=""
+                class="block dark:hidden"
+              />
+              <img
+                src="./assets/icons/darkmode/Aside-5.svg"
+                alt=""
+                class="hidden dark:block"
+              />
+              <a
+                href=""
+                class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+                >Settings</a
+              >
+            </li>
+            <li class="flex py-3 pl-5 gap-4">
+              <img
+                src="./assets/icons/menu 6.svg"
+                alt=""
+                class="block dark:hidden"
+              />
+              <img
+                src="./assets/icons/darkmode/Aside-6.svg"
+                alt=""
+                class="hidden dark:block"
+              />
+              <a
+                href=""
+                class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+                >Support</a
+              >
+            </li>
+            <li class="flex py-3 pl-5 gap-4">
+              <img
+                src="./assets/icons/menu 7.svg"
+                alt=""
+                class="block dark:hidden"
+              />
+              <img
+                src="./assets/icons/darkmode/Aside-7.svg"
+                alt=""
+                class="hidden dark:block"
+              />
+              <a
+                href=""
+                class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+                >Profile</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <!-- Dark-mode & Exit -->
+        <div
+          class="flex flex-col justify-center items-start w-full gap-6 mt-[140px]"
+        >
+          <!-- Dark-mode -->
+          <div
+            id="theme-switch-m"
+            class="inline-flex bg-[--surface-light2] self-center p-1 gap-1 rounded-lg"
+          >
+            <button
+              id="light-btn-m"
+              class="flex py-[6px] pl-4 pr-5 gap-3 rounded-md whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] bg-[--surface-light3] dark:bg-transparent"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M11.9999 6.8555C9.1668 6.8555 6.87012 9.15218 6.87012 11.9853C6.87012 14.8184 9.1668 17.1151 11.9999 17.1151C14.833 17.1151 17.1297 14.8184 17.1297 11.9853C17.1297 9.15218 14.833 6.8555 11.9999 6.8555ZM5.37012 11.9853C5.37012 8.32375 8.33837 5.3555 11.9999 5.3555C15.6614 5.3555 18.6297 8.32375 18.6297 11.9853C18.6297 15.6468 15.6614 18.6151 11.9999 18.6151C8.33837 18.6151 5.37012 15.6468 5.37012 11.9853Z"
+                  fill="#5C5F61"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M11.9999 1.93948C12.5522 1.93948 12.9999 2.3872 12.9999 2.93948V3.01185C12.9999 3.56413 12.5522 4.01185 11.9999 4.01185C11.4476 4.01185 10.9999 3.56413 10.9999 3.01185V2.93948C10.9999 2.3872 11.4476 1.93948 11.9999 1.93948ZM4.8341 4.81948C5.22462 4.42896 5.85779 4.42896 6.24831 4.81948L6.36591 4.93708C6.75643 5.3276 6.75643 5.96076 6.36591 6.35129C5.97538 6.74181 5.34222 6.74181 4.95169 6.35129L4.8341 6.23369C4.44357 5.84317 4.44357 5.21 4.8341 4.81948ZM19.1657 4.81948C19.5563 5.21001 19.5563 5.84318 19.1657 6.2337L19.0481 6.35129C18.6576 6.74181 18.0244 6.74181 17.6339 6.35128C17.2434 5.96076 17.2434 5.32759 17.6339 4.93707L17.7515 4.81948C18.1421 4.42895 18.7752 4.42896 19.1657 4.81948ZM1.9541 11.9853C1.9541 11.433 2.40182 10.9853 2.9541 10.9853H3.02647C3.57875 10.9853 4.02647 11.433 4.02647 11.9853C4.02647 12.5376 3.57875 12.9853 3.02647 12.9853H2.9541C2.40182 12.9853 1.9541 12.5376 1.9541 11.9853ZM19.9734 11.9853C19.9734 11.433 20.4211 10.9853 20.9734 10.9853H21.0457C21.598 10.9853 22.0457 11.433 22.0457 11.9853C22.0457 12.5376 21.598 12.9853 21.0457 12.9853H20.9734C20.4211 12.9853 19.9734 12.5376 19.9734 11.9853ZM6.3659 17.6193C6.75643 18.0098 6.75643 18.643 6.36591 19.0335L6.24832 19.1511C5.85779 19.5416 5.22463 19.5416 4.8341 19.1511C4.44358 18.7606 4.44357 18.1274 4.83409 17.7369L4.95169 17.6193C5.34221 17.2288 5.97538 17.2288 6.3659 17.6193ZM17.6339 17.6193C18.0244 17.2288 18.6576 17.2288 19.0481 17.6193L19.1657 17.7369C19.5563 18.1274 19.5563 18.7606 19.1657 19.1511C18.7752 19.5416 18.142 19.5416 17.7515 19.1511L17.6339 19.0335C17.2434 18.643 17.2434 18.0098 17.6339 17.6193ZM11.9999 19.9587C12.5522 19.9587 12.9999 20.4065 12.9999 20.9587V21.0311C12.9999 21.5834 12.5522 22.0311 11.9999 22.0311C11.4476 22.0311 10.9999 21.5834 10.9999 21.0311V20.9587C10.9999 20.4065 11.4476 19.9587 11.9999 19.9587Z"
+                  fill="#5C5F61"
+                />
+              </svg>
+            </button>
+            <button
+              id="dark-btn-m"
+              class="flex py-[6px] pl-4 pr-5 gap-3 rounded-md whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white bg-transparent dark:bg-[--surface-light3]"
+            >
+              <svg
+                class="block dark:hidden"
+                width="20"
+                height="20"
+                viewBox="0 0 20 21"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M8.45313 1.35651C9.05673 1.92408 8.91122 2.78313 8.63508 3.41723L8.63457 3.4184C8.22217 4.36102 7.99546 5.39431 8.00387 6.48732L8.00389 6.48998C8.02068 10.5459 11.3932 14.0084 15.524 14.1774L15.5246 14.1774C16.1346 14.2028 16.7176 14.1605 17.2836 14.0592C17.6627 13.9902 18.0353 13.9778 18.3713 14.0562C18.7141 14.1361 19.0594 14.3233 19.274 14.6744C19.4876 15.0239 19.4975 15.4148 19.417 15.7535C19.3378 16.087 19.1636 16.4135 18.9367 16.7209C16.9616 19.4231 13.6737 21.1339 10.0049 20.9748L10.0044 20.9748C4.7973 20.7458 0.439436 16.5811 0.0788232 11.4289C-0.250579 6.86208 2.45997 2.88545 6.39837 1.22456C7.03118 0.956541 7.8729 0.810927 8.45313 1.35651ZM7.36518 2.49126C7.27774 2.50302 7.15075 2.5348 6.98257 2.60611L6.98123 2.60668C3.59592 4.03433 1.29446 7.43675 1.57499 11.3217L1.57511 11.3234C1.88073 15.6955 5.60466 19.2796 10.0699 19.4762C13.2249 19.613 16.0397 18.1433 17.7267 15.8344L17.7291 15.8312C17.8307 15.6936 17.8907 15.5838 17.9246 15.5035C17.8393 15.4992 17.7168 15.5049 17.5514 15.5351L17.549 15.5355C16.8764 15.656 16.1838 15.7061 15.4627 15.6761C10.5499 15.4752 6.52483 11.374 6.50391 6.49753C6.49401 5.1869 6.76657 3.94596 7.26011 2.81768C7.32211 2.67519 7.352 2.56714 7.36518 2.49126ZM7.48777 2.48881C7.48775 2.48883 7.48728 2.48872 7.48639 2.48846L7.48777 2.48881Z"
+                  fill="#5C5F61"
+                />
+              </svg>
+              <svg
+                class="hidden dark:block"
+                width="20"
+                height="20"
+                viewBox="0 0 17 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.85307 8.27997C2.09307 11.7133 5.0064 14.5066 8.49307 14.66C10.9531 14.7666 13.1531 13.62 14.4731 11.8133C15.0197 11.0733 14.7264 10.58 13.8131 10.7466C13.3664 10.8266 12.9064 10.86 12.4264 10.84C9.1664 10.7066 6.49973 7.97997 6.4864 4.75997C6.47973 3.89331 6.65973 3.07331 6.9864 2.32664C7.3464 1.49997 6.91307 1.10664 6.07973 1.45997C3.43973 2.57331 1.63307 5.23331 1.85307 8.27997Z"
+                  stroke="white"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Separator -->
+          <div
+            class="h-px w-52 bg-[var(--gray-300)] dark:bg-[#2F3132] self-center"
+          ></div>
+
+          <!-- Exit -->
+          <div class="flex py-3 pl-5 gap-4">
+            <img
+              src="./assets/icons/exit.svg"
+              alt="exit"
+              class="block dark:hidden"
+            />
+            <img
+              src="./assets/icons/darkmode/Exit.svg"
+              alt="exit"
+              class="hidden dark:block"
+            />
+            <a
+              href=""
+              class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <aside
+      class="hidden sm:flex sm:flex-col sm:items-start sm:w-[292px] sm:flex-shrink-0 sm:my-5 sm:ml-5 sm:rounded-2xl sm:shadow-[0px_4px_58.5px_0px_#0000000F] sm:bg-[--surface-light]"
+    >
+      <!-- Profile -->
+      <div class="flex justify-center items-center self-center mt-16 gap-3">
+        <img
+          src="./assets/images/profile.png"
+          alt="profile"
+          class="w-14 h-14"
+        />
+        <div class="flex flex-col justify-center items-start">
+          <h1 class="text-lg font-extrabold text-[var(--text-primary)]">
+            Hello, Sarah
+          </h1>
+          <h2
+            class="whitespace-nowrap text-sm font-medium text-[var(--text-secondary)]"
+          >
+            Tuesday, April 25, 2023
+          </h2>
+        </div>
+      </div>
+
+      <!-- Nav-menu -->
+      <nav class="w-full mt-[72px]">
+        <ul class="flex flex-col justify-center items-start w-full gap-6 pl-3">
+          <li class="flex py-3 pl-5 gap-4">
+            <img
+              src="./assets/icons/menu 1.svg"
+              alt=""
+              class="block dark:hidden"
+            />
+            <img
+              src="./assets/icons/darkmode/Aside-1.svg"
+              alt=""
+              class="hidden dark:block"
+            />
+            <a
+              href="index.html"
+              class="whitespace-nowrap text-base font-bold text-[var(--primary)] dark:text-white"
+              >Home</a
+            >
+          </li>
+          <li class="flex py-3 pl-5 gap-4">
+            <img
+              src="./assets/icons/menu 2.svg"
+              alt=""
+              class="block dark:hidden"
+            />
+            <img
+              src="./assets/icons/darkmode/Aside-2.svg"
+              alt=""
+              class="hidden dark:block"
+            />
+            <a
+              href=""
+              class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+              >Tasks</a
+            >
+          </li>
+          <li class="flex py-3 pl-5 gap-4">
+            <img
+              src="./assets/icons/menu 3.svg"
+              alt=""
+              class="block dark:hidden"
+            />
+            <img
+              src="./assets/icons/darkmode/Aside-3.svg"
+              alt=""
+              class="hidden dark:block"
+            />
+            <a
+              href=""
+              class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+              >Calendar</a
+            >
+          </li>
+          <li class="flex py-3 pl-5 gap-4">
+            <img
+              src="./assets/icons/menu 4.svg"
+              alt=""
+              class="block dark:hidden"
+            />
+            <img
+              src="./assets/icons/darkmode/Aside-4.svg"
+              alt=""
+              class="hidden dark:block"
+            />
+            <a
+              href=""
+              class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+              >Reports</a
+            >
+          </li>
+          <li class="flex py-3 pl-5 gap-4">
+            <img
+              src="./assets/icons/menu 5.svg"
+              alt=""
+              class="block dark:hidden"
+            />
+            <img
+              src="./assets/icons/darkmode/Aside-5.svg"
+              alt=""
+              class="hidden dark:block"
+            />
+            <a
+              href=""
+              class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+              >Settings</a
+            >
+          </li>
+          <li class="flex py-3 pl-5 gap-4">
+            <img
+              src="./assets/icons/menu 6.svg"
+              alt=""
+              class="block dark:hidden"
+            />
+            <img
+              src="./assets/icons/darkmode/Aside-6.svg"
+              alt=""
+              class="hidden dark:block"
+            />
+            <a
+              href=""
+              class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+              >Support</a
+            >
+          </li>
+          <li class="flex py-3 pl-5 gap-4">
+            <img
+              src="./assets/icons/menu 7.svg"
+              alt=""
+              class="block dark:hidden"
+            />
+            <img
+              src="./assets/icons/darkmode/Aside-7.svg"
+              alt=""
+              class="hidden dark:block"
+            />
+            <a
+              href=""
+              class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+              >Profile</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Dark-mode & Exit -->
+      <div
+        class="flex flex-col justify-center items-start w-full gap-6 mt-[227px] mb-8"
+      >
+        <!-- Dark-mode -->
+        <div
+          id="theme-switch-d"
+          class="inline-flex bg-[--surface-light2] self-center p-1 gap-1 rounded-lg"
+        >
+          <button
+            id="light-btn-d"
+            class="flex py-[6px] pl-4 pr-5 gap-3 rounded-md whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] bg-[--surface-light3] dark:bg-transparent"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.9999 6.8555C9.1668 6.8555 6.87012 9.15218 6.87012 11.9853C6.87012 14.8184 9.1668 17.1151 11.9999 17.1151C14.833 17.1151 17.1297 14.8184 17.1297 11.9853C17.1297 9.15218 14.833 6.8555 11.9999 6.8555ZM5.37012 11.9853C5.37012 8.32375 8.33837 5.3555 11.9999 5.3555C15.6614 5.3555 18.6297 8.32375 18.6297 11.9853C18.6297 15.6468 15.6614 18.6151 11.9999 18.6151C8.33837 18.6151 5.37012 15.6468 5.37012 11.9853Z"
+                fill="#5C5F61"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.9999 1.93948C12.5522 1.93948 12.9999 2.3872 12.9999 2.93948V3.01185C12.9999 3.56413 12.5522 4.01185 11.9999 4.01185C11.4476 4.01185 10.9999 3.56413 10.9999 3.01185V2.93948C10.9999 2.3872 11.4476 1.93948 11.9999 1.93948ZM4.8341 4.81948C5.22462 4.42896 5.85779 4.42896 6.24831 4.81948L6.36591 4.93708C6.75643 5.3276 6.75643 5.96076 6.36591 6.35129C5.97538 6.74181 5.34222 6.74181 4.95169 6.35129L4.8341 6.23369C4.44357 5.84317 4.44357 5.21 4.8341 4.81948ZM19.1657 4.81948C19.5563 5.21001 19.5563 5.84318 19.1657 6.2337L19.0481 6.35129C18.6576 6.74181 18.0244 6.74181 17.6339 6.35128C17.2434 5.96076 17.2434 5.32759 17.6339 4.93707L17.7515 4.81948C18.1421 4.42895 18.7752 4.42896 19.1657 4.81948ZM1.9541 11.9853C1.9541 11.433 2.40182 10.9853 2.9541 10.9853H3.02647C3.57875 10.9853 4.02647 11.433 4.02647 11.9853C4.02647 12.5376 3.57875 12.9853 3.02647 12.9853H2.9541C2.40182 12.9853 1.9541 12.5376 1.9541 11.9853ZM19.9734 11.9853C19.9734 11.433 20.4211 10.9853 20.9734 10.9853H21.0457C21.598 10.9853 22.0457 11.433 22.0457 11.9853C22.0457 12.5376 21.598 12.9853 21.0457 12.9853H20.9734C20.4211 12.9853 19.9734 12.5376 19.9734 11.9853ZM6.3659 17.6193C6.75643 18.0098 6.75643 18.643 6.36591 19.0335L6.24832 19.1511C5.85779 19.5416 5.22463 19.5416 4.8341 19.1511C4.44358 18.7606 4.44357 18.1274 4.83409 17.7369L4.95169 17.6193C5.34221 17.2288 5.97538 17.2288 6.3659 17.6193ZM17.6339 17.6193C18.0244 17.2288 18.6576 17.2288 19.0481 17.6193L19.1657 17.7369C19.5563 18.1274 19.5563 18.7606 19.1657 19.1511C18.7752 19.5416 18.142 19.5416 17.7515 19.1511L17.6339 19.0335C17.2434 18.643 17.2434 18.0098 17.6339 17.6193ZM11.9999 19.9587C12.5522 19.9587 12.9999 20.4065 12.9999 20.9587V21.0311C12.9999 21.5834 12.5522 22.0311 11.9999 22.0311C11.4476 22.0311 10.9999 21.5834 10.9999 21.0311V20.9587C10.9999 20.4065 11.4476 19.9587 11.9999 19.9587Z"
+                fill="#5C5F61"
+              />
+            </svg>
+            Light
+          </button>
+          <button
+            id="dark-btn-d"
+            class="flex py-[6px] pl-4 pr-5 gap-3 rounded-md whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white bg-transparent dark:bg-[--surface-light3]"
+          >
+            <svg
+              class="block dark:hidden"
+              width="20"
+              height="20"
+              viewBox="0 0 20 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8.45313 1.35651C9.05673 1.92408 8.91122 2.78313 8.63508 3.41723L8.63457 3.4184C8.22217 4.36102 7.99546 5.39431 8.00387 6.48732L8.00389 6.48998C8.02068 10.5459 11.3932 14.0084 15.524 14.1774L15.5246 14.1774C16.1346 14.2028 16.7176 14.1605 17.2836 14.0592C17.6627 13.9902 18.0353 13.9778 18.3713 14.0562C18.7141 14.1361 19.0594 14.3233 19.274 14.6744C19.4876 15.0239 19.4975 15.4148 19.417 15.7535C19.3378 16.087 19.1636 16.4135 18.9367 16.7209C16.9616 19.4231 13.6737 21.1339 10.0049 20.9748L10.0044 20.9748C4.7973 20.7458 0.439436 16.5811 0.0788232 11.4289C-0.250579 6.86208 2.45997 2.88545 6.39837 1.22456C7.03118 0.956541 7.8729 0.810927 8.45313 1.35651ZM7.36518 2.49126C7.27774 2.50302 7.15075 2.5348 6.98257 2.60611L6.98123 2.60668C3.59592 4.03433 1.29446 7.43675 1.57499 11.3217L1.57511 11.3234C1.88073 15.6955 5.60466 19.2796 10.0699 19.4762C13.2249 19.613 16.0397 18.1433 17.7267 15.8344L17.7291 15.8312C17.8307 15.6936 17.8907 15.5838 17.9246 15.5035C17.8393 15.4992 17.7168 15.5049 17.5514 15.5351L17.549 15.5355C16.8764 15.656 16.1838 15.7061 15.4627 15.6761C10.5499 15.4752 6.52483 11.374 6.50391 6.49753C6.49401 5.1869 6.76657 3.94596 7.26011 2.81768C7.32211 2.67519 7.352 2.56714 7.36518 2.49126ZM7.48777 2.48881C7.48775 2.48883 7.48728 2.48872 7.48639 2.48846L7.48777 2.48881Z"
+                fill="#5C5F61"
+              />
+            </svg>
+            <svg
+              class="hidden dark:block"
+              width="20"
+              height="20"
+              viewBox="0 0 17 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.85307 8.27997C2.09307 11.7133 5.0064 14.5066 8.49307 14.66C10.9531 14.7666 13.1531 13.62 14.4731 11.8133C15.0197 11.0733 14.7264 10.58 13.8131 10.7466C13.3664 10.8266 12.9064 10.86 12.4264 10.84C9.1664 10.7066 6.49973 7.97997 6.4864 4.75997C6.47973 3.89331 6.65973 3.07331 6.9864 2.32664C7.3464 1.49997 6.91307 1.10664 6.07973 1.45997C3.43973 2.57331 1.63307 5.23331 1.85307 8.27997Z"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Dark
+          </button>
+        </div>
+
+        <!-- Separator -->
+        <div
+          class="h-px w-52 self-center bg-[var(--gray-300)] dark:bg-[#2F3132]"
+        ></div>
+
+        <!-- Exit -->
+        <div class="flex py-3 pl-8 gap-4">
+          <img
+            src="./assets/icons/exit.svg"
+            alt="exit"
+            class="block dark:hidden"
+          />
+          <img
+            src="./assets/icons/darkmode/Exit.svg"
+            alt="exit"
+            class="hidden dark:block"
+          />
+          <a
+            href=""
+            class="whitespace-nowrap text-sm font-semibold text-[var(--text-secondary)] dark:text-white"
+            >Logout</a
+          >
+        </div>
+      </div>
+    </aside>
+
+    <main class="flex flex-col flex-1 sm:ml-[50px] mx-4">
+      <!-- Mobile Profile -->
+      <section class="sm:hidden flex justify-start items-center mt-6 gap-3">
+        <img
+          src="./assets/images/profile.png"
+          alt="profile"
+          class="w-14 h-14"
+        />
+        <div class="flex flex-col justify-center items-start">
+          <h1 class="text-lg font-extrabold text-[var(--text-primary)]">
+            Hello, Sarah
+          </h1>
+          <h2 class="text-sm font-medium text-[var(--text-secondary)]">
+            Tuesday, April 25, 2023
+          </h2>
+        </div>
+      </section>
+
+      <!-- Pending Tasks -->
+      <section
+        class="flex flex-col justify-between items-start w-auto sm:w-[744px] mt-[60px] sm:mt-24 gap-4"
+      >
+        <!-- Title & Counter -->
+        <div class="flex flex-col w-full gap-1">
+          <h2
+            class="whitespace-nowrap text-base sm:text-xl font-extrabold text-[var(--text-primary)]"
+          >
+            Today's Tasks
+          </h2>
+          <h3
+            id="activeTasksCountText"
+            class="whitespace-nowrap text-xs sm:text-sm font-extrabold text-[var(--text-secondary)]"
+          >
+            No tasks for today!
+          </h3>
+        </div>
+
+        <!-- Initial State -->
+        <div
+          id="initialState"
+          class="flex flex-col w-full gap-[38px] sm:gap-[52px]"
+        >
+          <div id="addTaskButtonSection">
+            <button
+              class="w-full flex items-center gap-2 p-2 bg-[--surface-light] rounded-[10px] border-2 border-dashed border-[#CCCCCC] dark:border-[#203E62] cursor-pointer"
+            >
+              <img
+                src="./assets/icons/add.svg"
+                alt="Add New Task"
+                class="w-6"
+              />
+              <h2 class="text-md font-bold text-[#007BFF] mb-2">
+                Add New Task
+              </h2>
+            </button>
+          </div>
+          <div
+            id="initialContent"
+            class="flex flex-col justify-center items-center gap-6 select-none cursor-default"
+          >
+            <img
+              src="./assets/images/2143202_Artboard 1.png"
+              alt=""
+              draggable="false"
+              class="self-center w-[211px] h-[172px] sm:w-[283px] sm:h-[232px] pointer-events-none"
+            />
+            <div class="flex flex-col w-full gap-1">
+              <h5
+                class="text-[#7D7D7F] dark:text-[#848890] text-base font-extrabold text-center"
+              >
+                What do you need to do today?
+              </h5>
+              <p
+                class="text-[#AFAEB2] dark:text-[#52555B] text-sm font-semibold text-center w-full max-w-[280px] sm:max-w-none mx-auto"
+              >
+                You can write your tasks here and start planning!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!--  Task form -->
+        <div
+          id="addTaskModal"
+          class="hidden flex flex-col w-full sm:w-[744px] p-[16px] border border-[#EBEDEF] dark:border-[--gray-800] rounded-[12px] shadow-[0px_4px_58.5px_0px_#0000000F] bg-[--background-light]"
+        >
+          <form id="taskForm" class="flex flex-col w-full">
+            <!-- Title & Description -->
+            <div class="flex flex-col gap-2">
+              <input
+                type="text"
+                id="taskTitle"
+                placeholder="Task name"
+                class="w-full px-3 py-2 rounded-md sm:font-bold font-semibold sm:text-base text-sm text-[#7D7D7F] dark:text-white bg-[--background-light] focus:outline-none focus:ring-0"
+                required
+              />
+              <input
+                type="text"
+                id="taskDescription"
+                placeholder="Description"
+                class="w-full px-3 py-2 rounded-md sm:font-semibold font-normal sm:text-sm text-xs text-[#AFAEB2] dark:text-[#83878F] bg-[--background-light] focus:outline-none focus:ring-0"
+              />
+            </div>
+
+            <!-- Tag Button & Dropdown (Priority Filter) -->
+            <div class="relative inline-block">
+              <!-- Tag Button -->
+              <button
+                id="tagBtn"
+                class="flex items-center h-8 w-[74px] gap-2 px-[8px] py-[4px] mt-6 ml-3 bg-[--background-light] border border-[#EBEDEF] dark:border-[--gray-800] rounded-[4px] text-sm font-semibold text-[#AFAEB2] cursor-pointer"
+              >
+                <img
+                  src="./assets/icons/tag-close.svg"
+                  alt="tags"
+                  class="default-tag-icon w-4 h-4"
+                />
+                <img
+                  src="./assets/icons/tag-open.svg"
+                  alt="tags"
+                  class="hidden active-tag-icon w-4 h-4"
+                />
+                Tags
+              </button>
+              <!-- Priority Filter -->
+              <div
+                class="hidden block w-[240px] left-0 top-full mt-6 ml-3 flex items-center gap-4 p-[10px] bg-[--surface-light] border border-[#EBEDEF] dark:border-[--gray-800] rounded-lg shadow-md z-50"
+                id="priorityTags"
+              >
+                <button
+                  data-priority="low"
+                  id="low"
+                  class="priority-filter px-2 pb-1 rounded-[4px] bg-[#C3FFF1] dark:bg-[#233332] text-[#11A483] text-sm font-medium hover:bg-green-200 dark:hover:bg-green-200"
+                >
+                  Low
+                </button>
+                <div
+                  class="border-l border-[#EBEDEF] dark:border-[--gray-800] h-[16px]"
+                ></div>
+                <button
+                  data-priority="medium"
+                  id="medium"
+                  class="priority-filter px-2 pb-1 rounded-[4px] bg-[#FFEFD6] dark:bg-[#302F2D] text-[#FFAF37] text-sm font-medium hover:bg-yellow-100 dark:hover:bg-yellow-100"
+                >
+                  Medium
+                </button>
+                <div
+                  class="border-l border-[#EBEDEF] dark:border-[--gray-800] h-[16px]"
+                ></div>
+                <button
+                  data-priority="high"
+                  id="high"
+                  class="priority-filter px-2 pb-1 rounded-[4px] bg-[#FFE2DB] dark:bg-[#3D2327] text-[#FF5F37] text-sm font-medium hover:bg-red-200 dark:hover:bg-red-200"
+                >
+                  High
+                </button>
+              </div>
+            </div>
+
+            <!-- Selected Tag (if any) -->
+            <div class="selected-tag-container"></div>
+
+            <!-- Bottom bar with submit -->
+            <div
+              class="w-[calc(100%+32px)] flex justify-end items-center -mx-[16px] mt-6 bg-[--background-light] border-t border-[#EBEDEF] dark:border-[--gray-800] pt-4 pr-4"
+            >
+              <button
+                type="submit"
+                class="px-4 py-2 bg-[--primary] text-white rounded-lg hover:bg-blue-400"
+              >
+                Add Task
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Tasks Container -->
+      <section
+        id="tasksContainer"
+        class="hidden flex flex-col justify-between items-start w-auto sm:w-[744px] mt-[16px] mb-[33px] gap-[33px] sm:gap-[60px]"
+      >
+        <!-- Active Tasks -->
+        <div id="activeTasksContainer" class="w-full">
+          <ul
+            id="activeTasksList"
+            class="flex flex-col w-full list-none p-0 gap-[16px]"
+          >
+            <!-- Active tasks will be added here -->
+          </ul>
+        </div>
+        <!-- Done Tasks -->
+        <div id="completedSection" class="hidden flex flex-col w-full gap-4">
+          <div class="flex flex-col w-full gap-1">
+            <h2
+              class="whitespace-nowrap text-base sm:text-xl font-extrabold text-[var(--text-primary)]"
+            >
+              Completed Tasks
+            </h2>
+            <h3
+              class="whitespace-nowrap text-xs sm:text-sm font-extrabold text-[var(--text-secondary)]"
+            >
+              <span id="done-count"></span> tasks completed
+            </h3>
+          </div>
+          <ul
+            id="done-tasks"
+            class="flex flex-col w-full list-none p-0 gap-[16px]"
+          >
+            <!-- Done tasks will be added here -->
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

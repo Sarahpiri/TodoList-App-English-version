@@ -1,0 +1,83 @@
+@font-face {
+    font-family: "Vazirmatn";
+    src: url(./assets/fonts/Vazirmatn-Bold.woff2);
+    font-weight: 700;
+  }
+  
+  @font-face {
+    font-family: "Vazirmatn";
+    src: url(./assets/fonts/Vazirmatn-SemiBold.woff2);
+    font-weight: 600;
+  }
+  
+  @font-face {
+    font-family: "Vazirmatn";
+    src: url(./assets/fonts/Vazirmatn-Medium.woff2);
+    font-weight: 500;
+  }
+  
+  @font-face {
+    font-family: "Vazirmatn";
+    src: url(./assets/fonts/Vazirmatn-Regular.woff2);
+    font-weight: 400;
+  }
+  
+  :root {
+    /* ===== Primary Colors ===== */
+    --primary: #2c7ef8;
+    --primary-hover-light: #075cd9;
+    --on-primary-light: #ffffff;
+    /* ===== Background Colors ===== */
+    --background-light: #ffffff;
+    --on-background-light: #191c1e;
+    --surface-light: #ffffff;
+    --surface-light2: #f7f7f7;
+    --surface-light3: #ffffff;
+    /* ===== Neutral Colors ===== */
+    --white: #ffffff;
+    --gray-100: #fefefe;
+    --gray-200: #f5f6f8;
+    --gray-300: #e1e0e5;
+    --gray-400: #c8c7cb;
+    --gray-500: #afaeb2;
+    --gray-600: #7d7d7f;
+    --gray-700: #646466;
+    --gray-800: #3d3d3d;
+    --gray-900: #000000;
+    /* ===== Semantic Colors ===== */
+    --success-color: #90f677;
+    --error-color: #e63946;
+    /* ===== Texts ===== */
+    --text-primary: var(--on-background-light);
+    --text-secondary: #7d7d7f;
+  }
+  
+  .dark {
+    /* ===== Primary Colors ===== */
+    --primary: #002247;
+    --primary-hover-Dark: #6ba4fa;
+    --on-primary-light: #ffffff;
+    /* ===== Background Colors ===== */
+    --background-light: #040810;
+    --on-background-light: #e6e9ef;
+    --surface-light: #091120;
+    --surface-light2: #0e1e34;
+    --surface-light3: #002247;
+    /* ===== Texts ===== */
+    --text-primary: var(--on-background-light);
+    --text-secondary: #848890;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Vazirmatn", sans-serif;
+    background-color: var(--background-light);
+    color: var(--on-background-light);
+  }
+  
