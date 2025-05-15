@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (pendingCount === 0) {
         pendingTextEl.textContent = "No tasks for today!";
       } else {
-        const persianPending = pendingCount.toLocaleString("fa-IR");
+        const persianPending = pendingCount.toLocaleString("en");
         pendingTextEl.textContent = `${persianPending} tasks to do`;
       }
   
