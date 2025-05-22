@@ -15,7 +15,9 @@ Absolutely! Based on your existing repository at https://github.com/Sarahpiri/To
 
 📸 **Demo**
 
-(https://github.com/Sarahpiri/TodoList-App-English-version/blob/main/assets/demo.gif)
+
+![A brief look at the performance of the project (e.g., Interactive demo of the To-Do List app in action)](assets/demo.gif)
+
 
 🛠️ Technologies Used
 HTML5: For structuring the web content.
