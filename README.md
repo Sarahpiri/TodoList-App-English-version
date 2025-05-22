@@ -1,5 +1,6 @@
-✨ **#My Simple React To-Do List App** ✨
+✨ **My React To-Do List App** ✨
 
+---
 
 📝 **Overview**
 
@@ -27,6 +28,8 @@ CSS3: For styling and layout.
 JavaScript (ES6+): The core programming language.
 React: The powerful JavaScript library used for building the user interface.
 React Icons: Utilized for a wide range of scalable vector icons.
+
+---
 
 💻 **How to Run Locally**
 Follow these steps to get a local copy of the project up and running on your development machine.
@@ -58,6 +61,8 @@ npm start
 # yarn start
 Open your web browser and visit http://localhost:3000 (or the specific port indicated in your terminal).
 
+---
+
 💡 **What I Learned**
 
 This project provided invaluable hands-on experience and helped me deepen my understanding of several core frontend development concepts:
@@ -66,6 +71,8 @@ Effective State Management: Learned how to efficiently manage and update compone
 Prop Drilling & Data Flow: Understood the importance and implementation of passing data between parent and child components using props.
 Client-Side Data Persistence: Successfully implemented the Local Storage API to save user data directly in the browser, ensuring task lists persist across sessions.
 React App Deployment: Gained experience in the process of deploying a React application to a hosting service like GitHub Pages.
+
+---
 
 📞 **Contact**
 
