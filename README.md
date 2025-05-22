@@ -19,7 +19,8 @@ Absolutely! Based on your existing repository at https://github.com/Sarahpiri/To
 ![A brief look at the performance of the project (e.g., Interactive demo of the To-Do List app in action)](assets/demo.gif)
 
 
-🛠️ Technologies Used
+🛠️ **Technologies Used**
+
 HTML5: For structuring the web content.
 CSS3: For styling and layout.
 JavaScript (ES6+): The core programming language.
